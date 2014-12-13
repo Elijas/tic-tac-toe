@@ -4,11 +4,11 @@ gameContinues = 0;
 printf("%d ",playerTurn),gameState_new
 
 %Checks whether legal moves were made
-if sum((gameState_old != gameState_new)(:)) != 1
-    printf('Illegal move: More than one move is made!\n')
+if sum((gameState != gameState_new)(:)) != 1
+    printf('Illegal move: No moves or more than one move is made!\n')
     gameContinues = -2;
 end
-if gameState_new(find(gameState_old != gameState_new)) != classes(playerTurn)
+if gameState_new(find(gameState != gameState_new)) != classes(playerTurn)
     printf('Illegal move: Played not as yourself!\n')
     gameContinues = -2;
 end
@@ -17,19 +17,19 @@ if gameContinues!=0, return, end
 %Checks whether terminal state is reached
 % Win conditions
 for c=classes
-    
     for i=1:3
-        if gameState_new(i,:)(:) == ones(3,1) * c; gameContinues = find(classes==c); break, end
-        if gameState_new(:,i)(:) == ones(3,1) * c; gameContinues = find(classes==c); break, end
+        if gameState_new(i,:)(:) == ones(3,1) * c, gameContinues = find(classes==c); break, end
+        if gameState_new(:,i)(:) == ones(3,1) * c, gameContinues = find(classes==c); break, end
     end
-    if gameState_new(find(eye(3)))(:) == ones(3,1) * c; gameContinues = find(classes==c); break, end
-    if gameState_new(find(eye(3)'))(:) == ones(3,1) * c; gameContinues = find(classes==c); break, end
+    if gameState_new(find(eye(3)))(:) == ones(3,1) * c, gameContinues = find(classes==c); break, end
+    if gameState_new(find(flipud(eye(3))))(:) == ones(3,1) * c, gameContinues = find(classes==c); break, end
 end
 % Tie Conditions
 if sum((gameState_new==0)(:))==0, gameContinues = -1; break, end
 
 if gameContinues>0, printf('Game ended: Player %d has won!\n', gameContinues), end
 if gameContinues<0, printf('Game ended: A Tie!\n', gameContinues), end
+if gameContinues==0,printf('cont'), end
 
 endfunction
 
