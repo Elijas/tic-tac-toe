@@ -1,7 +1,7 @@
 function [gameState_new gameContinues] = gameEngine_checkMoves(gameState, gameState_new, playerTurn, classes)
 gameContinues = 0;
 
-printf("%d ",playerTurn),gameState_new
+printf("player %d: ",playerTurn),gameState_new
 
 %Checks whether legal moves were made
 if sum((gameState != gameState_new)(:)) != 1
@@ -25,11 +25,9 @@ for c=classes
     if gameState_new(find(flipud(eye(3))))(:) == ones(3,1) * c, gameContinues = find(classes==c); break, end
 end
 % Tie Conditions
-if sum((gameState_new==0)(:))==0, gameContinues = -1; break, end
+if sum((gameState_new==0)(:))==0, gameContinues = -1; end
 
 if gameContinues>0, printf('Game ended: Player %d has won!\n', gameContinues), end
-if gameContinues<0, printf('Game ended: A Tie!\n', gameContinues), end
-if gameContinues==0,printf('cont'), end
+if gameContinues<0, printf('Game ended: A Tie!\n'), end
 
 endfunction
-
