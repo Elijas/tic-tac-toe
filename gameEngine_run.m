@@ -9,6 +9,8 @@ if (isequal(player2_name, "playerAI")), player2 = @(gameState, playerMarker) pla
     else if (isequal(player2_name, "playerHuman")), player2 = @(gameState, playerMarker) playerHuman(gameState, playerMarker); 
 else printf("Error: Incorrect Player 2's name: %s\n", player2_name), gameFlag=-2; end end end
 
+%if (isequal(player1_name, "playerAI")), 
+
 gameStatistics = [0;0;0]; % Player 1 wins, Player 2 wins, ties
 gameStatistics_errors = 0;
 gameStatistics_history = [];
