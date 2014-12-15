@@ -1,1 +1,3 @@
-`gameEngine_run(100,'playerRandom','playerAI')`
+Usage examples:
+`gameEngine_run('playerAI','playerRandom',100)`
+`gameEngine_run('playerHuman','playerBoring')`
