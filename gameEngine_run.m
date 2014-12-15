@@ -42,14 +42,13 @@ end
 
 
 
-if !isHumanPlaying
+if !isHumanPlaying && gameCount>1
     close all;
-    figNumber=1;
+    figureID = 3;
     
     printf("%s: %d, %s: %d, ties: %d\n", player1_name, gameStatistics(1), player2_name, gameStatistics(2), gameStatistics(3)); if gameStatistics_errors, printf("[Errors: %d]\n", gameStatistics_errors), end;
     
-    figure(figNumber++);
-    subplot(1,2,1);
+    subplot(2,2,1);
     hold on;
     plot(gameStatistics_results(1,:), 'r')
     plot(gameStatistics_results(2,:), 'g')
@@ -58,9 +57,9 @@ if !isHumanPlaying
     xlabel('Games played')
     ylabel('Games won')
 
-    subplot(1,2,2);
-    hold on;
     gameStatistics_results ./= ones(3, 1) * sum(gameStatistics_results, 1);
+    subplot(2,2,2);
+    hold on;
     plot(gameStatistics_results(1,:), 'r')
     plot(gameStatistics_results(2,:), 'g')
     plot(gameStatistics_results(3,:), 'k')
@@ -73,7 +72,7 @@ if !isHumanPlaying
         global player1_nn_lsizes
         save playerAI/knowledge/1_last player1_nn_lsizes player1_nn_params
         global player1_learningCurve
-        figure(figNumber++);
+        subplot(2,2,figureID++);
         plot(player1_learningCurve);
     end
 
@@ -82,7 +81,7 @@ if !isHumanPlaying
         global player2_nn_lsizes
         save playerAI/knowledge/2_last player2_nn_lsizes player2_nn_params
         global player2_learningCurve
-        figure(figNumber++);
+        subplot(2,2,figureID++);
         plot(player2_learningCurve);
     end
 end
