@@ -1,5 +1,6 @@
-function [gameState_new gameFlag] = gameEngine_checkState(gameState, gameState_new, playerTurn, playerMarkers)
+function [gameState_new gameFlag] = gameEngine_checkState(gameState, gameState_new, playerTurn)
 gameFlag = 0;
+global playerMarkers;
 
 %DEBUG
 %printf("player %d: ",playerTurn),gameState_new

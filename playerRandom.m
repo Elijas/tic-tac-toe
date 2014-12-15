@@ -1,4 +1,4 @@
-function gameState = player_Random(gameState, playerMarker)
+function gameState = playerRandom(gameState, playerMarker)
 
 if sum((gameState==0)(:))==0, return, end %Sanity check (don't enter an endless loop if there is no way out)
 while true

@@ -1,6 +1,6 @@
-function gameState = player_AI(gameState, playerMarker)
+function gameState = playerAI(gameState, playerMarker)
 
-playerMarkers = [1, 2];
+global playerMarkers
 
 nn_input = (zeros(size(gameState)) + (gameState==playerMarkers(find(playerMarkers==playerMarker))) - (gameState==playerMarkers(playerMarkers!=playerMarker)) )(:)';
 %nn_input = [(gameState==playerMarkers(find(playerMarkers==playerMarker)))(:); (gameState==playerMarkers(playerMarkers!=playerMarker))(:)]';

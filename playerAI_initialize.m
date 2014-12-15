@@ -1,0 +1,3 @@
+function playerAI_initialize
+
+endfunction
