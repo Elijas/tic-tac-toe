@@ -10,8 +10,10 @@ if (isequal(player2_name, "playerAI")), player2 = @(gameState, playerNo) playerA
     else if (isequal(player2_name, "playerBoring")), player2 = @(gameState, playerNo) playerBoring(gameState, playerNo);
 else printf("Error: Incorrect Player 2's name: %s\n", player2_name), gameFlag=-2; end end end end
 
-if isequal(player1_name, "playerAI"), playerAI_initialize(1); end
-if isequal(player2_name, "playerAI"), playerAI_initialize(2); end
+global AIlearn_totalIterations; AIlearn_totalIterations = gameCount; % To help make learning rate lower towards the end of learning 
+global AIlearn_currIteration;
+if isequal(player1_name, "playerAI"), playerAI_initialize(1), global player1_totalWins; end
+if isequal(player2_name, "playerAI"), playerAI_initialize(2), global player2_totalWins; end
 
 global isHumanPlaying % Will be used to turn on/off UI features
 isHumanPlaying = false;
@@ -27,11 +29,13 @@ gameStatistics_errors = 0; % Terminal states reached because of system/player fa
 gameStatistics_results = [];
 
 for i=1:gameCount
+    AIlearn_currIteration = i; % To help make learning rate lower towards the end of learning
+
     printf("%d\r",i); if exist('OCTAVE_VERSION'), fflush(stdout); end
     gameResult = gameEngine_oneGame(player1, player2);
     
-    if isequal(player1_name, "playerAI"), playerAI_learn(gameResult, 1); end
-    if isequal(player2_name, "playerAI"), playerAI_learn(gameResult, 2); end
+    if isequal(player1_name, "playerAI"), player1_totalWins+=(gameResult==1); playerAI_learn(gameResult, 1); end
+    if isequal(player2_name, "playerAI"), player2_totalWins+=(gameResult==2); playerAI_learn(gameResult, 2); end
     
     if gameResult == 1, gameStatistics(1)++;
     else if gameResult == 2, gameStatistics(2)++;
