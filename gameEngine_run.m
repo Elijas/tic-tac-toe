@@ -28,7 +28,7 @@ for i=1:gameCount
     gameResult = gameEngine_oneGame(player1, player2);
     
     if isAIPlaying, playerAI_learn(gameResult); end
-
+    
     if gameResult == 1, gameStatistics(1)++;
     else if gameResult == 2, gameStatistics(2)++;
     else if gameResult == -1, gameStatistics(3)++;
@@ -36,7 +36,11 @@ for i=1:gameCount
     gameStatistics_results = [gameStatistics_results gameStatistics];
 end
 
-
+if isAIPlaying
+    global nn_lsizes
+    global nn_params
+    save playerAI/knowledge/last nn_lsizes nn_params
+end
 
 if !isHumanPlaying && gameCount>1
     close all;
@@ -64,9 +68,9 @@ if !isHumanPlaying && gameCount>1
     ylabel('Fraction of games won')
     
     if isAIPlaying
-        
-        subplot(2,2,1);
-        %plot();
+        global learningCurve
+        subplot(2,2,3:4);
+        plot(learningCurve);
     end
 end
 endfunction
