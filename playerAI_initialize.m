@@ -4,9 +4,12 @@ global nn_lsizes
 global nn_params
 global nn_alpha
 global nn_lambda
-nn_lsizes = [18 30 9];
+global learningCurve
+nn_lsizes = [27 9];
 nn_params = nnInitParams(nn_lsizes);
-nn_alpha = .5;
+load('playerAI/knowledge/K')
+nn_alpha = 0;
 nn_lambda = 0;
+learningCurve=[];
 endfunction
 

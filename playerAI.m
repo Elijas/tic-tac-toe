@@ -12,6 +12,8 @@ if nn_lsizes(1)==9, nn_input = ( zeros(size(gameState)) + (gameState==playerNo) 
 else if nn_lsizes(1)==18, nn_input = [(gameState==playerNo)(:); (gameState==3-playerNo)(:)]';
 else if nn_lsizes(1)==27, nn_input = [(gameState==playerNo)(:); (gameState==3-playerNo)(:); (gameState==0)(:)]'; end end end
 
+%disp(gameState),disp(reshape(nnFeedForward(nn_params, nn_lsizes, nn_input),3,3))
+
 [move, move] = max((gameState(:)'==0) .* nnFeedForward(nn_params, nn_lsizes, nn_input));
 gameState(move) = playerNo;
 
