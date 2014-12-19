@@ -23,7 +23,7 @@ gameStatistics_errors = 0; % Terminal states reached because of system/player fa
 gameStatistics_results = [];
 
 for i=1:gameCount
-    printf("%d\r",i); if exist('OCTAVE_VERSION'), fflush(stdout); end
+    printf("%d [%d %d %d]\r",i,gameStatistics(1),gameStatistics(2),gameStatistics(3)); if exist('OCTAVE_VERSION'), fflush(stdout); end
     
     gameResult = gameEngine_oneGame(player1, player2);
     
